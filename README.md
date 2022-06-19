@@ -1,35 +1,21 @@
 # make-my-note
 
-This template should help get you started developing with Vue 3 in Vite.
+## How to use
 
-## Recommended IDE Setup
+1. Grab this repo to desktop
+2. Run `npm install`
+3. Run `npm run dev`
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Examples with animations
 
-## Customize configuration
+Sorting notes
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+[![alt=Sorting notes](/readme-content/sorting.gif)]
 
-## Project Setup
+Adding note
 
-```sh
-npm install
-```
+[![alt=Adding note](/readme-content/adding-note.gif)]
 
-### Compile and Hot-Reload for Development
+Delete note(s)
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+[![alt=Delete note(s)](/readme-content/delete-notes.gif)]
