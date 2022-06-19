@@ -10,12 +10,12 @@
 
 Sorting notes
 
-[![alt=Sorting notes](/readme-content/sorting.gif)]
+![alt=Sorting notes](/readme-content/sorting.gif)
 
 Adding note
 
-[![alt=Adding note](/readme-content/adding-note.gif)]
+![alt=Adding note](/readme-content/adding-note.gif)
 
 Delete note(s)
 
-[![alt=Delete note(s)](/readme-content/delete-notes.gif)]
+![alt=Delete note(s)](/readme-content/delete-notes.gif)
