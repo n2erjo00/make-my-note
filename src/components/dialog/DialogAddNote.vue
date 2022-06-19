@@ -26,9 +26,9 @@
 	</div>
 </template>
 <script setup>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { mockAPI } from '../../stores/storeNotes';
-const notesAPI = mockAPI();
+const api = mockAPI();
 const properties = defineProps({
 	modelValue: {
 		type: Boolean,
@@ -52,7 +52,7 @@ const setNoteValidate = () => {
 	noteTitleIsValid.value = noteTitle.value !== '';
 	noteContentIsValid.value = noteContent.value !== '';
 	if (noteTitleIsValid.value && noteContentIsValid.value) {
-		notesAPI.setNote(noteTitle.value, noteContent.value);
+		api.setNote(noteTitle.value, noteContent.value);
 		emit('update:modelValue', false);
 	}
 }

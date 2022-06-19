@@ -5,10 +5,8 @@ import { mockAPI } from './stores/storeNotes';
 const api = mockAPI();
 onMounted(() => {
 	const notes = api.getNotes()
-		.then(notes => {
-			console.log(notes);
-		})
 		.catch(err => {
+			// Luckily not a real API :D so can't fail
 			console.error(`There was an error ${err}`);
 		})
 });

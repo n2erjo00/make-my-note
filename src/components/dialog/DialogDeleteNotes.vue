@@ -16,7 +16,7 @@
 <script setup>
 import { mockAPI } from '../../stores/storeNotes';
 import CautionSVG from '../icons/CautionIcon.vue'
-const notesAPI = mockAPI();
+const api = mockAPI();
 const properties = defineProps({
 	modelValue: {
 		type: Array,
@@ -28,7 +28,7 @@ const closeDialog = () => {
 	emit('update:modelValue', []);
 };
 const deleteNotes = (notes) => {
-	notesAPI.deleteNote(notes)
+	api.deleteNote(notes)
 	emit('update:modelValue', []);
 }
 </script>

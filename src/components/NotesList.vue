@@ -1,9 +1,9 @@
 <template>
 <main class="container">
 <section class="row mb-4">
-	<NotesSummary v-model="notesAPI.notes.length" :label="'Total'"/>
-	<NotesSummary v-model="notesAPI.notes.filter(note => note.status.toLowerCase() === 'completed').length" :label="'Completed'"/>
-	<NotesSummary v-model="notesAPI.notes.filter(note => note.status.toLowerCase() !== 'completed').length" :label="'Not completed'"/>
+	<NotesSummary v-model="api.notes.length" :label="'Total'"/>
+	<NotesSummary v-model="api.notes.filter(note => note.status.toLowerCase() === 'completed').length" :label="'Completed'"/>
+	<NotesSummary v-model="api.notes.filter(note => note.status.toLowerCase() !== 'completed').length" :label="'Not completed'"/>
 </section>
 <section class="row">
 	<div class="col-12">
@@ -14,10 +14,10 @@
 						<th>
 							<div class="d-flex align-items-center justify-content-between">
 								<div class="form-check">
-									<input class="form-check-input" type="checkbox" value="" id="select-all-notes" @change="selectNotesAll" :checked="notesAPI.notes.length && modal.deleteNotes.length === notesAPI.notes.length" :disabled="!notesAPI.notes.length">
+									<input class="form-check-input" type="checkbox" value="" id="select-all-notes" @change="selectNotesAll" :checked="api.notes.length && modal.deleteNotes.length === api.notes.length" :disabled="!api.notes.length">
 									<label class="form-check-label" for="select-all-notes">ID</label>
 								</div>
-								<button class="btn btn-sort" :class="{ 'is-desc': !sortingMap.id }" type="button" @click="sortByID('id')" v-if="notesAPI.notes.length">
+								<button class="btn btn-sort" :class="{ 'is-desc': !sortingMap.id }" type="button" @click="sortByID('id')" v-if="api.notes.length">
 									<span class="visually-hidden">Sort by id</span>
 									<AngleIcon/>
 									<AngleIcon/>
@@ -27,7 +27,7 @@
 						<th>
 							<div class="d-flex align-items-center justify-content-between">
 								<div>Title</div>
-								<button class="btn btn-sort" :class="{ 'is-desc': !sortingMap.title }" type="button" @click="sortByID('title')" v-if="notesAPI.notes.length">
+								<button class="btn btn-sort" :class="{ 'is-desc': !sortingMap.title }" type="button" @click="sortByID('title')" v-if="api.notes.length">
 									<span class="visually-hidden">Sort by title</span>
 									<AngleIcon/>
 									<AngleIcon/>
@@ -37,7 +37,7 @@
 						<th>
 							<div class="d-flex align-items-center justify-content-between">
 								<div>Content</div>
-								<button class="btn btn-sort" type="button" :class="{ 'is-desc': !sortingMap.content }" @click="sortByID('content')" v-if="notesAPI.notes.length">
+								<button class="btn btn-sort" type="button" :class="{ 'is-desc': !sortingMap.content }" @click="sortByID('content')" v-if="api.notes.length">
 									<span class="visually-hidden">Sort by content</span>
 									<AngleIcon/>
 									<AngleIcon/>
@@ -47,7 +47,7 @@
 						<th>
 							<div class="d-flex align-items-center justify-content-between">
 								<div>Status</div>
-								<button class="btn btn-sort" type="button" :class="{ 'is-desc': !sortingMap.status }" @click="sortByID('status')" v-if="notesAPI.notes.length">
+								<button class="btn btn-sort" type="button" :class="{ 'is-desc': !sortingMap.status }" @click="sortByID('status')" v-if="api.notes.length">
 									<span class="visually-hidden">Sort by status</span>
 									<AngleIcon/>
 									<AngleIcon/>
@@ -65,13 +65,13 @@
 						</td>
 					</tr>
 				</tfoot>
-				<tbody v-if="!notesAPI.notes.length">
+				<tbody v-if="!api.notes.length">
 					<tr>
 						<td class="text-center py-4 lead" colspan="4">No notes. Please use "Add" button to add a note</td>
 					</tr>
 				</tbody>
 				<tbody v-else>
-					<tr v-for="note in notesAPI.notes" :key="note.id">
+					<tr v-for="note in api.notes" :key="note.id">
 						<td>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" :id="`note-${note.id}`" name="note_id" :value="note.id" :checked="modal.deleteNotes.indexOf(note.id) !== -1" v-model="modal.deleteNotes">
@@ -99,15 +99,15 @@ import DialogAddNote from './dialog/DialogAddNote.vue'
 import DialogDeleteNotes from './dialog/DialogDeleteNotes.vue';
 import { mockAPI } from '../stores/storeNotes';
 import AngleIcon from './icons/AngleIcon.vue';
-const notesAPI = mockAPI();
+const api = mockAPI();
 const modal = reactive({
 	addNote: false,
 	deleteNotes: [],
-	total: notesAPI.notes.length
+	total: api.notes.length
 });
 const selectNotesAll = (evt) => {
 	if (evt.target.checked) {
-		modal.deleteNotes = notesAPI.notes.map(note => note.id);
+		modal.deleteNotes = api.notes.map(note => note.id);
 	} else {
 		modal.deleteNotes = [];
 	}
@@ -124,7 +124,7 @@ const sortingMap = ref({
 const sortByID = (sortByKey) => {
 	sortingMap.value[sortByKey] = !sortingMap.value[sortByKey];
 	if (sortingMap.value[sortByKey]) {
-		notesAPI.notes = notesAPI.notes.sort((a, b) => {
+		api.notes = api.notes.sort((a, b) => {
 			if (a[sortByKey] < b[sortByKey]) {
 				return -1;
 			} else if (a[sortByKey] > b[sortByKey]) {
@@ -134,7 +134,7 @@ const sortByID = (sortByKey) => {
 			}
 		});
 	} else {
-		notesAPI.notes = notesAPI.notes.sort((a, b) => {
+		api.notes = api.notes.sort((a, b) => {
 			if (a[sortByKey] > b[sortByKey]) {
 				return -1;
 			} else if (a[sortByKey] < b[sortByKey]) {
